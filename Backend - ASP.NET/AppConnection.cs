@@ -10,7 +10,7 @@ namespace OnlineFoodOrderingSystem
     {
         public static string GetConnectionString()
         {
-            return ConfigurationManager.ConnectionStrings["OnlineFoodOrderingSystem.Properties.Settings.Setting"].ConnectionString;
+            return ConfigurationManager.ConnectionStrings["LocalConnection"].ConnectionString;
         }
     }
 }
