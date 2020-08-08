@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@drawable/splash_activity_background</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="MainHeadersText">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <!--<item name="android:layout_marginLeft">@dimen/three</item>-->
+        <!--<item name="android:layout_marginRight">@dimen/three</item>-->
+        <!--<item name="android:layout_marginTop">@dimen/twenty</item>-->
+        <!--<item name="android:layout_marginBottom">@dimen/five</item>-->
+        <item name="android:singleLine">true</item>
+        <!--<item name="android:textAlignment">center</item>-->
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <!--<item name="android:textSize">@dimen/twenty</item>-->
+        <item name="android:textColor">@color/iconbackground</item>
+        <!--<item name="android:fontFamily">@font/roboto_regular</item>-->
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="tvStyle" parent="@android:style/Widget.TextView">
+        <item name="android:background">#1E1921</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:textColorLink">#FFBC4F</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ButtonViewFull">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <!--<item name="android:layout_marginLeft">@dimen/five</item>-->
+        <!--<item name="android:layout_marginRight">@dimen/five</item>-->
+        <!--<item name="android:layout_marginBottom">@dimen/three</item>-->
+        <!--<item name="android:background">@drawable/btn_custom</item>-->
+        <!--<item name="android:fontFamily">@font/roboto_regular</item>-->
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+</resources>

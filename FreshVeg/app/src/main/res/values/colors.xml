@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#C5142F</color>
+    <color name="colorPrimaryDark">#C21111</color>
+    <color name="colorAccent">#F1E8EB</color>
+    <color name="hintcolor">#F1E8EB</color>
+    <color name="black">#000000</color>
+
+    <color name="white">#fff</color>
+    <color name="backGround">#285135</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="fuchsia">#FF00FF</color>
+    <color name="red">#FF0000</color>
+    <color name="silver">#C0C0C0</color>
+    <color name="gray">#808080</color>
+    <color name="olive">#808000</color>
+    <color name="purple">#800080</color>
+    <color name="maroon">#800000</color>
+    <color name="aqua">#00FFFF</color>
+    <color name="lime">#00FF00</color>
+    <color name="teal">#008080</color>
+    <color name="green">#008000</color>
+    <color name="green_gray">#828282</color>
+    <color name="blue">#0000FF</color>
+    <color name="navy">#000080</color>
+    <color name="light_blue">#3D93AA</color>
+    <color name="web_color">#005F9C</color>
+    <color name="background">#EFF0F1</color>
+    <color name="sub_head">#266380</color>E61400
+    <color name="dark_red">#E61400</color>
+
+
+    <color name="blueStart">#4EFFF3</color>
+    <color name="blueEnd">#0ca6f9</color>
+    <color name="purpleStart">#a369ff</color>
+    <color name="purpleEnd">#0e56ff</color>
+    <color name="roseStart">#FF6A00</color>
+    <color name="roseEnd">#ef0276</color>
+    <color name="greenStart">#a7f56e</color>
+    <color name="greenEnd">#11c612</color>
+    <color name="main_scroll">#3AA4BC</color>
+    <color name="textview">#266380</color>
+    <color name="icon_halfcolor">#FED988</color>
+    <color name="iconbackground">#285135</color>
+    <color name="transparent">#ffffffff</color>
+</resources>
+

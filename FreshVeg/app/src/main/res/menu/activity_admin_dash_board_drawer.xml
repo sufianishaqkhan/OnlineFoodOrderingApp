@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_products"
+            android:icon="@drawable/ic_add_products_black_24dp"
+            android:title="Products" />
+        <item
+            android:id="@+id/nav_categories"
+            android:icon="@drawable/ic_category_24dp"
+            android:title="Categories" />
+        <item
+            android:id="@+id/nav_deliveryboy"
+            android:icon="@drawable/delivery_boy"
+            android:title="Delivery Boy" />
+        <item
+            android:id="@+id/nav_admin_signout"
+            android:icon="@drawable/logout"
+            android:title="Sign Out" />
+    </group>
+
+    <item android:title="Order">
+        <menu>
+            <item
+                android:id="@+id/nav_view_order"
+                android:icon="@drawable/ic_category_24dp"
+                android:title="View Order" />
+            <item
+                android:id="@+id/nav_assign_order"
+                android:icon="@drawable/order_assign"
+                android:title="Assign Order" />
+        </menu>
+    </item>
+</menu>
