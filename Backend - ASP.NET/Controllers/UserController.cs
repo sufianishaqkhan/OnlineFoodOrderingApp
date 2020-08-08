@@ -10,7 +10,7 @@ namespace OnlineFoodOrderingSystem.Controllers
     public class UserController : ApiController
     {
         [HttpPost]
-        public int LoginUser(string u_email, string u_pass)
+        public int LoginUser(string u_email, string u_password)
         {
             using (SqlConnection con = new SqlConnection(AppConnection.GetConnectionString()))
             {
@@ -19,7 +19,7 @@ namespace OnlineFoodOrderingSystem.Controllers
                     con.Open();
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("u_email", u_email);
-                    cmd.Parameters.AddWithValue("u_pass", u_pass);
+                    cmd.Parameters.AddWithValue("u_pass", u_password);
 
                     SqlDataReader sdr = cmd.ExecuteReader();
                     if (sdr.Read())
@@ -32,7 +32,29 @@ namespace OnlineFoodOrderingSystem.Controllers
         }
 
         [HttpPost]
-        public bool PostUsers(string u_name, string u_email, string u_pass)
+        public bool ForgotPassword(string u_email, string u_password)
+        {
+            using (SqlConnection con = new SqlConnection(AppConnection.GetConnectionString()))
+            {
+                using (SqlCommand cmd = new SqlCommand("USP_USERS_FORGET_PASSWORD", con))
+                {
+                    con.Open();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("u_email", u_email);
+                    cmd.Parameters.AddWithValue("u_pass", u_password);
+
+                    int rowEffected = cmd.ExecuteNonQuery();
+                    if (rowEffected > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        [HttpPost]
+        public bool PostUser(string u_name, string u_email, string u_password)
         {
             using (SqlConnection con = new SqlConnection(AppConnection.GetConnectionString()))
             {
@@ -42,7 +64,7 @@ namespace OnlineFoodOrderingSystem.Controllers
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("u_name", u_name);
                     cmd.Parameters.AddWithValue("u_email", u_email);
-                    cmd.Parameters.AddWithValue("u_pass", u_pass);
+                    cmd.Parameters.AddWithValue("u_pass", u_password);
 
 
                     int rowEffected = cmd.ExecuteNonQuery();
@@ -87,28 +109,6 @@ namespace OnlineFoodOrderingSystem.Controllers
                     cmd.Parameters.AddWithValue("oa_u_id", od_user_id);
 
                     cmd.ExecuteNonQuery();
-                }
-            }
-            return false;
-        }
-
-        [HttpPut]
-        public bool ForgotPassword(string u_email, string u_pass)
-        {
-            using (SqlConnection con = new SqlConnection(AppConnection.GetConnectionString()))
-            {
-                using (SqlCommand cmd = new SqlCommand("USP_USERS_FORGET_PASSWORD", con))
-                {
-                    con.Open();
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("u_email", u_email);
-                    cmd.Parameters.AddWithValue("u_pass", u_pass);
-
-                    int rowEffected = cmd.ExecuteNonQuery();
-                    if (rowEffected > 0)
-                    {
-                        return true;
-                    }
                 }
             }
             return false;

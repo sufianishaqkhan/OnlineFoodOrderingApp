@@ -15,12 +15,12 @@ import com.usamaqadeer.freshveg.R;
 
 import java.util.ArrayList;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHolder> {
+public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyViewHolder> {
 
     private ArrayList<Product> productlist;
     private Context context;
 
-    public ProductAdapter(ArrayList<Product> filmList, Context context) {
+    public ProductsAdapter(ArrayList<Product> filmList, Context context) {
         this.productlist = filmList;
         this.context = context;
     }
@@ -34,7 +34,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductAdapter.MyViewHolder myViewHolder, int i) {
+    public void onBindViewHolder(@NonNull ProductsAdapter.MyViewHolder myViewHolder, int i) {
         final Product product = productlist.get(i);
         myViewHolder.tvProductId.setText(product.getId());
         myViewHolder.tvProductName.setText(product.getName());

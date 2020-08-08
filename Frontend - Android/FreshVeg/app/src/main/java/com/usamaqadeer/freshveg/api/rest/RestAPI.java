@@ -14,14 +14,52 @@ import retrofit2.http.Query;
 
 public interface RestAPI {
 
-    @POST("values/AdminLogin")
+    /* LOGIN APIS */
+    @POST("Admin/LoginAdmin")
     Call<String> loginAdmin(
-            @Query("email") String email,
-            @Query("password") String password
+            @Query("a_email") String email,
+            @Query("a_password") String password
     );
 
-    @GET("values/ViewCategory")
-    Call<List<CategoriesModel>> getCategories();
+    @POST("DeliveryBoy/LoginDeliveryBoy")
+    Call<String> loginDeliveryBoy(
+            @Query("db_email") String email,
+            @Query("db_password") String password
+    );
 
+    @POST("User/LoginUser")
+    Call<String> loginUser(
+            @Query("u_email") String email,
+            @Query("u_password") String password
+    );
+
+    /* FORGOT PASSWORD APIS */
+    @POST("Admin/ForgotPassword")
+    Call<String> forgotPasswordAdmin(
+            @Query("a_email") String email,
+            @Query("a_password") String password
+    );
+
+    @POST("DeliveryBoy/ForgotPassword")
+    Call<String> forgotPasswordDeliveryBoy(
+            @Query("db_email") String email,
+            @Query("db_password") String password
+    );
+
+    @POST("User/ForgotPassword")
+    Call<String> forgotPasswordUser(
+            @Query("u_email") String email,
+            @Query("u_password") String password
+    );
+
+    @POST("User/PostUser")
+    Call<String> postUser(
+            @Query("u_name") String name,
+            @Query("u_email") String email,
+            @Query("u_password") String password
+    );
+
+    @GET("Product/GetCategories")
+    Call<List<CategoriesModel>> getCategories();
 
 }

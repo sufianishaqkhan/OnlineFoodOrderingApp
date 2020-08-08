@@ -10,7 +10,7 @@ namespace OnlineFoodOrderingSystem.Controllers
     public class AdminController : ApiController
     {
         [HttpPost]
-        public int AdminLogin(string email, string password)
+        public int LoginAdmin(string a_email, string a_password)
         {
             using (SqlConnection con = new SqlConnection(AppConnection.GetConnectionString()))
             {
@@ -18,8 +18,8 @@ namespace OnlineFoodOrderingSystem.Controllers
                 {
                     con.Open();
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("a_email", email);
-                    cmd.Parameters.AddWithValue("a_password", password);
+                    cmd.Parameters.AddWithValue("a_email", a_email);
+                    cmd.Parameters.AddWithValue("a_password", a_password);
 
                     SqlDataReader sdr = cmd.ExecuteReader();
                     if (sdr.Read())
@@ -29,6 +29,28 @@ namespace OnlineFoodOrderingSystem.Controllers
                 }
             }
             return 0;
+        }
+
+        [HttpPost]
+        public bool ForgotPassword(string a_email, string a_password)
+        {
+            using (SqlConnection con = new SqlConnection(AppConnection.GetConnectionString()))
+            {
+                using (SqlCommand cmd = new SqlCommand("USP_ADMIN_FORGOT_PASSWORD", con))
+                {
+                    con.Open();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("a_email", a_email);
+                    cmd.Parameters.AddWithValue("a_password", a_password);
+
+                    int rowEffected = cmd.ExecuteNonQuery();
+                    if (rowEffected > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         [HttpPost]

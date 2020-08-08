@@ -13,25 +13,25 @@
             android:icon="@drawable/ic_category_24dp"
             android:title="Categories" />
         <item
-            android:id="@+id/nav_deliveryboy"
+            android:id="@+id/nav_deliveryboys"
             android:icon="@drawable/delivery_boy"
-            android:title="Delivery Boy" />
+            android:title="Delivery Boys" />
         <item
             android:id="@+id/nav_admin_signout"
             android:icon="@drawable/logout"
             android:title="Sign Out" />
     </group>
 
-    <item android:title="Order">
+    <item android:title="Orders">
         <menu>
             <item
                 android:id="@+id/nav_view_order"
                 android:icon="@drawable/ic_category_24dp"
-                android:title="View Order" />
+                android:title="View Orders" />
             <item
                 android:id="@+id/nav_assign_order"
                 android:icon="@drawable/order_assign"
-                android:title="Assign Order" />
+                android:title="Assign Orders" />
         </menu>
     </item>
 </menu>

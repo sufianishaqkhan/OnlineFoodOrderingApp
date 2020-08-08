@@ -31,6 +31,28 @@ namespace OnlineFoodOrderingSystem.Controllers
             return 0;
         }
 
+        [HttpPost]
+        public bool ForgotPassword(string db_email, string db_password)
+        {
+            using (SqlConnection con = new SqlConnection(AppConnection.GetConnectionString()))
+            {
+                using (SqlCommand cmd = new SqlCommand("USP_DELIVERYBOYS_FORGOT_PASSWORD", con))
+                {
+                    con.Open();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("db_email", db_email);
+                    cmd.Parameters.AddWithValue("db_password", db_password);
+
+                    int rowEffected = cmd.ExecuteNonQuery();
+                    if (rowEffected > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         [HttpGet]
         public IEnumerable<DeliveryBoys> GetDeliveryBoys()
         {

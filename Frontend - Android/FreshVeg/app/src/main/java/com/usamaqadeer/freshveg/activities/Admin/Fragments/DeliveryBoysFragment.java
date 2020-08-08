@@ -8,13 +8,13 @@ import android.view.ViewGroup;
 
 import com.usamaqadeer.freshveg.R;
 
-public class ProductsFragment extends Fragment {
+public class DeliveryBoysFragment extends Fragment {
 
-    public ProductsFragment() { }
+    public DeliveryBoysFragment() { }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_products, container, false);
+        View view = inflater.inflate(R.layout.fragment_delivery_boys, container, false);
         return view;
     }
 

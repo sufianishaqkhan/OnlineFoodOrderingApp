@@ -45,7 +45,7 @@ public class DeliveryBoyActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.delivery_boy, menu);
+        getMenuInflater().inflate(R.menu.delivery_boys, menu);
         return true;
     }
 
