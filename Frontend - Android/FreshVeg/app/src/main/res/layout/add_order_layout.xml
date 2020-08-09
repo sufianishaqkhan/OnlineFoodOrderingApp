@@ -40,7 +40,7 @@
             android:layout_weight="2"
             android:paddingLeft="5dp"
             android:gravity="center_vertical"
-            android:text="Shift Start:"
+            android:text="Product:"
             android:fontFamily="sans-serif"
             android:textSize="18sp" />
         <android.support.v7.widget.CardView
@@ -54,8 +54,7 @@
                 android:id="@+id/sp_product"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:paddingLeft="10dp"
-                android:entries="@array/hours_array" />
+                android:paddingLeft="10dp" />
         </android.support.v7.widget.CardView>
     </LinearLayout>
     <EditText

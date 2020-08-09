@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +31,8 @@ import retrofit2.Response;
 public class UserCartFragment extends Fragment {
     private RecyclerView recyclerView;
     private FloatingActionButton fabAddOrder;
-    private EditText etName, etQty, etLocation;
+    private Spinner spProduct;
+    private EditText etQty, etLocation;
     private TextView tvPrice;
     private Button btnAdd, btnCancel;
     private List<ProductsModel> productsList;
@@ -87,11 +89,11 @@ public class UserCartFragment extends Fragment {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (etName.getText().toString().isEmpty() == true || etQty.getText().toString().isEmpty() == true || etLocation.getText().toString().isEmpty() == true) {
+                if (etQty.getText().toString().isEmpty() == true || etLocation.getText().toString().isEmpty() == true) {
                     Toast.makeText(getContext(), "Fields cannot be empty.", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    addOrder(UserDashboardActivity.u_id, etName.getText().toString(), etQty.getText().toString(), etLocation.getText().toString(), tvPrice.getText().toString());
+//                    addOrder(UserDashboardActivity.u_id, productsList.get(spProducts.getSelectedItemPosition()).getP_Id(), etQty.getText().toString(), etLocation.getText().toString(), tvPrice.getText().toString());
                     dialog.dismiss();
                 }
             }
@@ -112,29 +114,27 @@ public class UserCartFragment extends Fragment {
     }
 
     private void initOrderDialog(Dialog dialog) {
-        etName = dialog.findViewById(R.id.et_name);
-        etEmail = dialog.findViewById(R.id.et_email);
-        etPassword = dialog.findViewById(R.id.et_password);
-        spShiftStart = dialog.findViewById(R.id.sp_shift_start);
-        spShiftEnd = dialog.findViewById(R.id.sp_shift_end);
-        btnAdd = dialog.findViewById(R.id.btn_add_db);
+        spProduct = dialog.findViewById(R.id.sp_product);
+        etQty = dialog.findViewById(R.id.et_qty);
+        etLocation = dialog.findViewById(R.id.et_location);
+        tvPrice = dialog.findViewById(R.id.tv_total_price);
+        btnAdd = dialog.findViewById(R.id.btn_order);
         btnCancel = dialog.findViewById(R.id.btn_cancel);
     }
 
     private void initDialogView(View view) {
-        etName = view.findViewById(R.id.et_name);
-        etEmail = view.findViewById(R.id.et_email);
-        etPassword = view.findViewById(R.id.et_password);
-        spShiftStart = view.findViewById(R.id.sp_shift_start);
-        spShiftEnd = view.findViewById(R.id.sp_shift_end);
-        btnAdd = view.findViewById(R.id.btn_add_db);
+        spProduct = view.findViewById(R.id.sp_product);
+        etQty = view.findViewById(R.id.et_email);
+        etLocation = view.findViewById(R.id.et_password);
+        tvPrice = view.findViewById(R.id.tv_total_price);
+        btnAdd = view.findViewById(R.id.btn_order);
         btnCancel = view.findViewById(R.id.btn_cancel);
     }
 
     /*ADD DELIVERY BOY API CALL*/
-    private void addDeliveryBoy(String name, String email, String password, String shiftStart, String shiftEnd){
+    private void addOrder(String uId, String pId, String qty, String location, String price){
         RestAPI service = RestClient.getRetrofitInstance().create(RestAPI.class);
-        Call<String> call = service.postDeliveryBoy(name, email, password, shiftStart, shiftEnd);
+        Call<String> call = service.postOrder(uId, pId, qty, location, price);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -142,7 +142,7 @@ public class UserCartFragment extends Fragment {
                     Toast.makeText(getContext(), "Delivery boy registration failed. Please try again later.", Toast.LENGTH_SHORT).show();
                 else if (response.body().equals("true")){
                     Toast.makeText(getContext(), "Delivery boy successfully registered.", Toast.LENGTH_SHORT).show();
-                    getDeliveryBoysData();
+                    getProductsData();
                 }
             }
 

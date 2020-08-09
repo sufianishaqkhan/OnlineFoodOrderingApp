@@ -103,4 +103,13 @@ public interface RestAPI {
 
     @GET("Order/GetOrderAssignDetails")
     Call<List<OrderAssignsModel>> getOrderAssignDetails();
+
+    @POST("User/PostOrderDetails")
+    Call<String> postOrder(
+            @Query("od_user_id") String od_user_id,
+            @Query("od_pid") String od_pid,
+            @Query("od_qty") String od_qty,
+            @Query("od_delivered_loc") String od_delivered_loc,
+            @Query("od_price") String od_price
+    );
 }
