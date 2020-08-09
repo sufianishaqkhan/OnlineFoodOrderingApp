@@ -1,6 +1,10 @@
 package com.usamaqadeer.freshveg.api.rest;
 
 import com.usamaqadeer.freshveg.api.models.CategoriesModel;
+import com.usamaqadeer.freshveg.api.models.DeliveryBoysModel;
+import com.usamaqadeer.freshveg.api.models.OrderAssignsModel;
+import com.usamaqadeer.freshveg.api.models.OrderDetailsModel;
+import com.usamaqadeer.freshveg.api.models.ProductsModel;
 
 import java.util.List;
 
@@ -14,7 +18,7 @@ import retrofit2.http.Query;
 
 public interface RestAPI {
 
-    /* LOGIN APIS */
+    /*LOGIN APIS*/
     @POST("Admin/LoginAdmin")
     Call<String> loginAdmin(
             @Query("a_email") String email,
@@ -59,7 +63,21 @@ public interface RestAPI {
             @Query("u_password") String password
     );
 
+    /*PRODUCTS AND CATEGORIES APIS*/
+    @GET("Product/GetProducts")
+    Call<List<ProductsModel>> getProducts();
+
     @GET("Product/GetCategories")
     Call<List<CategoriesModel>> getCategories();
 
+    /*DELIVERY BOYS APIS*/
+    @GET("DeliveryBoy/GetDeliveryBoys")
+    Call<List<DeliveryBoysModel>> getDeliveryBoys();
+
+    /*ORDERS APIS*/
+    @GET("Order/GetOrderDetails")
+    Call<List<OrderDetailsModel>> getOrderDetails();
+
+    @GET("Order/GetOrderAssignDetails")
+    Call<List<OrderAssignsModel>> getOrderAssignDetails();
 }

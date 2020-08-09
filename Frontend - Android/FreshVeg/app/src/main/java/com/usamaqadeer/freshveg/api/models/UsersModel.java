@@ -14,9 +14,9 @@ public class UsersModel {
     @SerializedName("u_pass")
     public String u_pass;
     @SerializedName("CreatedDate")
-    public Date CreatedDate;
+    public String CreatedDate;
 
-    public UsersModel(int u_id, String u_name, String u_email, String u_pass, Date createdDate) {
+    public UsersModel(int u_id, String u_name, String u_email, String u_pass, String createdDate) {
         this.u_id = u_id;
         this.u_name = u_name;
         this.u_email = u_email;
@@ -56,11 +56,11 @@ public class UsersModel {
         this.u_pass = u_pass;
     }
 
-    public Date getCreatedDate() {
+    public String getCreatedDate() {
         return CreatedDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(String createdDate) {
         CreatedDate = createdDate;
     }
 }

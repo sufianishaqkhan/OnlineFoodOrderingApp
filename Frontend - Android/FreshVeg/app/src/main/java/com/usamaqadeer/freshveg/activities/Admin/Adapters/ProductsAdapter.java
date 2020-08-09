@@ -9,65 +9,72 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.usamaqadeer.freshveg.activities.Admin.Model.Product;
+import com.squareup.picasso.Picasso;
 import com.usamaqadeer.freshveg.R;
+import com.usamaqadeer.freshveg.api.models.ProductsModel;
+import com.usamaqadeer.freshveg.api.rest.RestClient;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyViewHolder> {
-
-    private ArrayList<Product> productlist;
+public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHolder> {
     private Context context;
+    private List<ProductsModel> productsList;
 
-    public ProductsAdapter(ArrayList<Product> filmList, Context context) {
-        this.productlist = filmList;
+    public ProductsAdapter(Context context, List<ProductsModel> productsList){
         this.context = context;
+        this.productsList = productsList;
     }
 
+    @Override
     @NonNull
-    @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View itemView = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.product_row_items, viewGroup, false);
-        return new MyViewHolder(itemView);
+    public ProductsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        View view = layoutInflater.inflate(R.layout.products_list_item, parent, false);
+        return new ProductsAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductsAdapter.MyViewHolder myViewHolder, int i) {
-        final Product product = productlist.get(i);
-        myViewHolder.tvProductId.setText(product.getId());
-        myViewHolder.tvProductName.setText(product.getName());
-        myViewHolder.tvProductQty.setText(product.getQty());
-        myViewHolder.tvProductPrice.setText(product.getQty());
-//        myViewHolder.l
-//        myViewHolder.imgProduct.setImageURI(pr);
-//                .setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                ((MainActivity) context).gotoNextFragment(FilmsDetailFragment.newInstance(film));
-//            }
-//        });
+    public void onBindViewHolder(@NonNull ProductsAdapter.ViewHolder view, int position) {
+        final ProductsModel selectedProduct = productsList.get(position);
 
+        Picasso.get()
+                .load(RestClient.IMAGE_URL +  selectedProduct.getP_pic())
+                .placeholder(R.drawable.ic_placeholder)
+                .error(R.drawable.ic_placeholder)
+                .into(view.ivProductImage);
+        view.tvProductId.setText(Integer.toString(selectedProduct.getP_id()));
+        view.tvProductName.setText(selectedProduct.getP_name());
+        view.tvProductQty.setText(Integer.toString(selectedProduct.getP_qty()));
+        view.tvProductPrice.setText("Rs " + selectedProduct.getP_unitprice());
+
+        view.listItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, selectedProduct.getP_name(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
-    public int getItemCount() {
-        return productlist.size();
-    }
+    public int getItemCount() { return productsList.size(); }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public ImageView imgProduct;
-        public TextView tvProductId, tvProductName, tvProductQty, tvProductPrice;
-        ConstraintLayout constraintLayout;
-        public MyViewHolder(View view) {
-            super(view);
-            imgProduct = (ImageView) view.findViewById(R.id.imgv_product_img);
-            tvProductId = (TextView) view.findViewById(R.id.tv_Product_Id);
-            tvProductName = (TextView) view.findViewById(R.id.tv_Product_name);
-            tvProductQty = (TextView) view.findViewById(R.id.tv_Product_qty);
-            tvProductPrice = (TextView) view.findViewById(R.id.tv_Product_price);
-            constraintLayout = itemView.findViewById(R.id.product_constraint);
+    class ViewHolder extends RecyclerView.ViewHolder {
+        private ConstraintLayout listItem;
+        private TextView tvProductId, tvProductName, tvProductQty, tvProductPrice;
+        private ImageView ivProductImage;
+
+        ViewHolder(View itemView) {
+            super(itemView);
+            ivProductImage = itemView.findViewById(R.id.iv_product_img);
+            tvProductId =  itemView.findViewById(R.id.tv_product_id);
+            tvProductName = itemView.findViewById(R.id.tv_product_name);
+            tvProductQty = itemView.findViewById(R.id.tv_product_qty);
+            tvProductPrice = itemView.findViewById(R.id.tv_product_price);
+            listItem = itemView.findViewById(R.id.product_constraint);
         }
     }
+
+    public ProductsModel getItem(int id) { return productsList.get(id); }
 }

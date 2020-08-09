@@ -55,8 +55,8 @@ namespace OnlineFoodOrderingSystem.Controllers
                         product.p_unitprice = Convert.ToDecimal(sdr["p_unitprice"].ToString());
                         product.p_qty = Convert.ToInt32(sdr["p_qty"].ToString());
                         product.p_weight = sdr["p_weight"].ToString();
+                        product.p_pic = sdr["p_pic"].ToString();
                         product.CreatedDate = sdr["CreatedDate"].ToString();
-                        //product.p_pic = sdr[""].ToString();
                         products.Add(product);
                     }
                 }

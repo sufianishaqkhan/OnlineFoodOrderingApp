@@ -17,5 +17,4 @@
             android:icon="@drawable/logout"
             android:title="Sign Out" />
     </group>
-
 </menu>

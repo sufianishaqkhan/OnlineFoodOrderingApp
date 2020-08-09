@@ -22,9 +22,8 @@
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginVertical="40dp"
                 android:layout_weight="2"
-                android:src="@drawable/ic_list_item" />
+                android:src="@drawable/ic_placeholder" />
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

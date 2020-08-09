@@ -43,6 +43,7 @@ public class CategoriesFragment extends Fragment {
         return view;
     }
 
+    /*GET CATEGORIES API CALL*/
     private void getCategoriesData(){
         RestAPI service = RestClient.getRetrofitInstance().create(RestAPI.class);
         Call<List<CategoriesModel>> call = service.getCategories();
@@ -62,8 +63,9 @@ public class CategoriesFragment extends Fragment {
         });
     }
 
+    /*LOAD CATEGORIES LIST IN RECYCLER VIEW USING ADAPTER*/
     private void loadCategoriesData(List<CategoriesModel> categoriesList) {
-        adapter = new CategoriesAdapter(getActivity().getApplicationContext(), categoriesList);
+        adapter = new CategoriesAdapter(getContext(), categoriesList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);

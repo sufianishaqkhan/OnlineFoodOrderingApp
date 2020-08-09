@@ -20,9 +20,9 @@ public class DeliveryBoysModel {
     @SerializedName("CreatedBy")
     public String CreatedBy;
     @SerializedName("CreatedDate")
-    public Date CreatedDate;
+    public String CreatedDate;
 
-    public DeliveryBoysModel(int db_id, String db_name, String db_email, String db_password, String db_shiftstart, String db_shiftend, String createdBy, Date createdDate) {
+    public DeliveryBoysModel(int db_id, String db_name, String db_email, String db_password, String db_shiftstart, String db_shiftend, String createdBy, String createdDate) {
         this.db_id = db_id;
         this.db_name = db_name;
         this.db_email = db_email;
@@ -89,11 +89,11 @@ public class DeliveryBoysModel {
         CreatedBy = createdBy;
     }
 
-    public Date getCreatedDate() {
+    public String getCreatedDate() {
         return CreatedDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(String createdDate) {
         CreatedDate = createdDate;
     }
 }

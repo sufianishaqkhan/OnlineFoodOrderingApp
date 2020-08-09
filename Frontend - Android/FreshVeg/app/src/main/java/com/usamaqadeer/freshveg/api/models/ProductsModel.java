@@ -12,7 +12,7 @@ public class ProductsModel {
     @SerializedName("p_category")
     public String p_category;
     @SerializedName("p_unitprice")
-    public double p_unitprice;
+    public String p_unitprice;
     @SerializedName("p_qty")
     public int p_qty;
     @SerializedName("p_weight")
@@ -20,9 +20,9 @@ public class ProductsModel {
     @SerializedName("p_pic")
     public String p_pic;
     @SerializedName("CreatedDate")
-    public Date CreatedDate;
+    public String CreatedDate;
 
-    public ProductsModel(int p_id, String p_name, String p_category, double p_unitprice, int p_qty, String p_weight, String p_pic, Date createdDate) {
+    public ProductsModel(int p_id, String p_name, String p_category, String p_unitprice, int p_qty, String p_weight, String p_pic, String createdDate) {
         this.p_id = p_id;
         this.p_name = p_name;
         this.p_category = p_category;
@@ -57,11 +57,11 @@ public class ProductsModel {
         this.p_category = p_category;
     }
 
-    public double getP_unitprice() {
+    public String getP_unitprice() {
         return p_unitprice;
     }
 
-    public void setP_unitprice(double p_unitprice) {
+    public void setP_unitprice(String p_unitprice) {
         this.p_unitprice = p_unitprice;
     }
 
@@ -89,11 +89,11 @@ public class ProductsModel {
         this.p_pic = p_pic;
     }
 
-    public Date getCreatedDate() {
+    public String getCreatedDate() {
         return CreatedDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(String createdDate) {
         CreatedDate = createdDate;
     }
 }

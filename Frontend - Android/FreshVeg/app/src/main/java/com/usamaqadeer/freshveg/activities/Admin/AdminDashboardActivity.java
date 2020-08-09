@@ -29,18 +29,18 @@ public class AdminDashboardActivity extends AppCompatActivity implements Navigat
     public Fragment fragmentDeliveryBoys = new DeliveryBoysFragment();
     public Fragment fragmentOrders = new OrdersFragment();
     public Fragment fragmentAssignOrders = new AssignOrdersFragment();
-    public static Fragment active;
+    public static Fragment activeFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_dashboard);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         loadInitialFragment(fragmentProducts);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -61,19 +61,20 @@ public class AdminDashboardActivity extends AppCompatActivity implements Navigat
 
     /* LOAD INITIAL FRAGMENT IN FRAGMENT CONTAINER*/
     private void loadInitialFragment(Fragment fragment) {
-        active = fragment;
+        activeFragment = fragment;
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_container, fragment);
+        transaction.disallowAddToBackStack();
         transaction.commit();
     }
 
     /* LOAD FRAGMENT IN FRAGMENT CONTAINER AS PER DEMAND*/
     private void loadFragment(Fragment fragment) {
-        active = fragment;
+        activeFragment = fragment;
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left);
         transaction.replace(R.id.main_container, fragment);
-        transaction.addToBackStack(null);
+        transaction.disallowAddToBackStack();
         transaction.commit();
     }
 
@@ -103,7 +104,6 @@ public class AdminDashboardActivity extends AppCompatActivity implements Navigat
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -121,7 +121,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements Navigat
         else if (id == R.id.nav_admin_signout)
             finish();
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

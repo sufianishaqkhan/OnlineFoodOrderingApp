@@ -13,16 +13,22 @@ public class OrderDetailsModel {
     public int od_qty;
     @SerializedName("od_delivered_loc")
     public String od_delivered_loc;
-    @SerializedName("db_shiftend")
-    public double od_price;
+    @SerializedName("od_price")
+    public String od_price;
+    @SerializedName("U_NAME")
+    public String U_NAME;
+    @SerializedName("P_NAME")
+    public String P_NAME;
 
-    public OrderDetailsModel(int od_id, int od_user_id, int od_pid, int od_qty, String od_delivered_loc, double od_price) {
+    public OrderDetailsModel(int od_id, int od_user_id, int od_pid, int od_qty, String od_delivered_loc, String od_price, String u_NAME, String p_NAME) {
         this.od_id = od_id;
         this.od_user_id = od_user_id;
         this.od_pid = od_pid;
         this.od_qty = od_qty;
         this.od_delivered_loc = od_delivered_loc;
         this.od_price = od_price;
+        this.U_NAME = u_NAME;
+        this.P_NAME = p_NAME;
     }
 
     public int getOd_id() {
@@ -65,11 +71,27 @@ public class OrderDetailsModel {
         this.od_delivered_loc = od_delivered_loc;
     }
 
-    public double getOd_price() {
+    public String getOd_price() {
         return od_price;
     }
 
-    public void setOd_price(double od_price) {
+    public void setOd_price(String od_price) {
         this.od_price = od_price;
+    }
+
+    public String getU_NAME() {
+        return U_NAME;
+    }
+
+    public void setU_NAME(String u_NAME) {
+        U_NAME = u_NAME;
+    }
+
+    public String getP_NAME() {
+        return P_NAME;
+    }
+
+    public void setP_NAME(String p_NAME) {
+        P_NAME = p_NAME;
     }
 }

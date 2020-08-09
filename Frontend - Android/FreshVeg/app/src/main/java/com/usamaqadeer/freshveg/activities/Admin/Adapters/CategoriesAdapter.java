@@ -65,4 +65,3 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
 
     public CategoriesModel getItem(int id) { return categoriesList.get(id); }
 }
-
