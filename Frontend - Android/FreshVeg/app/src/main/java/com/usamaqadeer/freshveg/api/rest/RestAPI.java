@@ -70,9 +70,32 @@ public interface RestAPI {
     @GET("Product/GetCategories")
     Call<List<CategoriesModel>> getCategories();
 
+    @POST("Admin/InsertCategory")
+    Call<String> postCategory(
+            @Query("category") String category
+    );
+
+    @POST("Admin/InsertProduct")
+    Call<String> postProduct(
+            @Query("p_name") String p_name,
+            @Query("p_category") int p_category,
+            @Query("p_unitprice") String p_unitprice,
+            @Query("p_qty") String p_qty,
+            @Query("p_weight") String p_weight
+    );
+
     /*DELIVERY BOYS APIS*/
     @GET("DeliveryBoy/GetDeliveryBoys")
     Call<List<DeliveryBoysModel>> getDeliveryBoys();
+
+    @POST("Admin/InsertDeliveryBoy")
+    Call<String> postDeliveryBoy(
+            @Query("db_name") String name,
+            @Query("db_email") String email,
+            @Query("db_password") String password,
+            @Query("db_shiftstart") String shiftStart,
+            @Query("db_shiftend") String shiftEnd
+    );
 
     /*ORDERS APIS*/
     @GET("Order/GetOrderDetails")

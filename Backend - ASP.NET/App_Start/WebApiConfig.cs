@@ -9,9 +9,7 @@ namespace OnlineFoodOrderingSystem
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API configuration and services
-
-            // Web API routes
+            // Web API configuration, services and routes
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(

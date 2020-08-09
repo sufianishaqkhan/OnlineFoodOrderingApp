@@ -1,10 +1,12 @@
-package com.usamaqadeer.freshveg.activities.Admin;
+package com.usamaqadeer.freshveg.activities.User;
 
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,28 +17,24 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.usamaqadeer.freshveg.R;
-import com.usamaqadeer.freshveg.activities.Admin.Fragments.AssignOrdersFragment;
-import com.usamaqadeer.freshveg.activities.Admin.Fragments.CategoriesFragment;
-import com.usamaqadeer.freshveg.activities.Admin.Fragments.DeliveryBoysFragment;
-import com.usamaqadeer.freshveg.activities.Admin.Fragments.OrdersFragment;
-import com.usamaqadeer.freshveg.activities.Admin.Fragments.ProductsFragment;
+import com.usamaqadeer.freshveg.activities.User.Fragments.UserCartFragment;
+import com.usamaqadeer.freshveg.activities.User.Fragments.UserOrdersFragment;
 
-public class AdminDashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    public Fragment fragmentProducts = new ProductsFragment();
-    public Fragment fragmentCategories = new CategoriesFragment();
-    public Fragment fragmentDeliveryBoys = new DeliveryBoysFragment();
-    public Fragment fragmentOrders = new OrdersFragment();
-    public Fragment fragmentAssignOrders = new AssignOrdersFragment();
+public class UserDashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    public Fragment fragmentUserCart = new UserCartFragment();
+    public Fragment fragmentUserOrders = new UserOrdersFragment();
     public static Fragment activeFragment;
+    public static String u_id;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_dashboard);
+        setContentView(R.layout.activity_users);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        loadInitialFragment(fragmentProducts);
+        u_id = getIntent().getStringExtra("u_id");
+        loadInitialFragment(fragmentUserCart);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -44,7 +42,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements Navigat
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -61,7 +59,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements Navigat
     private void loadInitialFragment(Fragment fragment) {
         activeFragment = fragment;
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.main_container, fragment);
+        transaction.replace(R.id.main_container_users, fragment);
         transaction.disallowAddToBackStack();
         transaction.commit();
     }
@@ -71,7 +69,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements Navigat
         activeFragment = fragment;
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left);
-        transaction.replace(R.id.main_container, fragment);
+        transaction.replace(R.id.main_container_users, fragment);
         transaction.disallowAddToBackStack();
         transaction.commit();
     }
@@ -88,7 +86,7 @@ public class AdminDashboardActivity extends AppCompatActivity implements Navigat
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.admin, menu);
+        getMenuInflater().inflate(R.menu.users, menu);
         return true;
     }
 
@@ -106,17 +104,11 @@ public class AdminDashboardActivity extends AppCompatActivity implements Navigat
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.nav_products)
-            loadFragment(fragmentProducts);
-        else if (id == R.id.nav_categories)
-            loadFragment(fragmentCategories);
-        else if (id == R.id.nav_deliveryboys)
-            loadFragment(fragmentDeliveryBoys);
-        else if (id == R.id.nav_view_order)
-            loadFragment(fragmentOrders);
-        else if (id == R.id.nav_assign_order)
-            loadFragment(fragmentAssignOrders);
-        else if (id == R.id.nav_admin_signout)
+        if (id == R.id.nav_user_cart)
+            loadFragment(fragmentUserCart);
+        else if (id == R.id.nav_user_order)
+            loadFragment(fragmentUserOrders);
+        else if (id == R.id.nav_user_signout)
             finish();
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

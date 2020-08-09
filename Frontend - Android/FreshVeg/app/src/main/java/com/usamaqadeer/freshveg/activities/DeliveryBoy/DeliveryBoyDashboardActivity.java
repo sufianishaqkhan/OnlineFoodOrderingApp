@@ -12,7 +12,7 @@ import android.view.MenuItem;
 
 import com.usamaqadeer.freshveg.R;
 
-public class DeliveryBoyActivity extends AppCompatActivity
+public class DeliveryBoyDashboardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override

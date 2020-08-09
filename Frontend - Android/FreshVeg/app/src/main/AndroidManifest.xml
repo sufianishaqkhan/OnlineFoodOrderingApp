@@ -28,11 +28,11 @@
             android:label="@string/title_activity_admin_dash_board"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".activities.DeliveryBoy.DeliveryBoyActivity"
+            android:name=".activities.DeliveryBoy.DeliveryBoyDashboardActivity"
             android:label="@string/title_activity_delivery_boy"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".activities.User.UserActivity"
+            android:name=".activities.User.UserDashboardActivity"
             android:label="@string/title_activity_users"
             android:theme="@style/AppTheme"></activity>
     </application>

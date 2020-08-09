@@ -1,10 +1,9 @@
-package com.usamaqadeer.freshveg.activities.Admin.Fragments;
+package com.usamaqadeer.freshveg.activities.User.Fragments;
 
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -12,11 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.usamaqadeer.freshveg.R;
-import com.usamaqadeer.freshveg.activities.Admin.Adapters.CategoriesAdapter;
+import com.usamaqadeer.freshveg.activities.User.UserDashboardActivity;
 import com.usamaqadeer.freshveg.api.models.CategoriesModel;
+import com.usamaqadeer.freshveg.api.models.ProductsModel;
 import com.usamaqadeer.freshveg.api.rest.RestAPI;
 import com.usamaqadeer.freshveg.api.rest.RestClient;
 
@@ -26,77 +27,71 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CategoriesFragment extends Fragment {
+public class UserCartFragment extends Fragment {
     private RecyclerView recyclerView;
-    private CategoriesAdapter adapter;
-    private FloatingActionButton fabAddCategory;
-    private EditText etName;
+    private FloatingActionButton fabAddOrder;
+    private EditText etName, etQty, etLocation;
+    private TextView tvPrice;
     private Button btnAdd, btnCancel;
+    private List<ProductsModel> productsList;
 
-    public CategoriesFragment() { }
+
+    public UserCartFragment() { }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_categories, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_cart, container, false);
 
         recyclerView = view.findViewById(R.id.recyclerView);
-        fabAddCategory = view.findViewById(R.id.fab_add_cat);
+        fabAddOrder = view.findViewById(R.id.fab_add_order);
 
         initDialogView(view);
-        getCategoriesData();
+        getProductsData();
 
-        fabAddCategory.setOnClickListener(new View.OnClickListener() {
+        fabAddOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addCategoryDialog();
+                addOrderDialog();
             }
         });
 
         return view;
     }
 
-    /*GET CATEGORIES API CALL*/
-    private void getCategoriesData(){
+    /*GET PRODUCTS API CALL*/
+    private void getProductsData(){
         RestAPI service = RestClient.getRetrofitInstance().create(RestAPI.class);
-        Call<List<CategoriesModel>> call = service.getCategories();
-        call.enqueue(new Callback<List<CategoriesModel>>() {
+        Call<List<ProductsModel>> call = service.getProducts();
+        call.enqueue(new Callback<List<ProductsModel>>() {
             @Override
-            public void onResponse(Call<List<CategoriesModel>> call, Response<List<CategoriesModel>> response) {
+            public void onResponse(Call<List<ProductsModel>> call, Response<List<ProductsModel>> response) {
                 if (response.body().isEmpty())
-                    Toast.makeText(getContext(), "Unable to retrieve categories list.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Unable to retrieve products list.", Toast.LENGTH_SHORT).show();
                 else
-                    loadCategoriesData(response.body());
+                    productsList = response.body();
             }
 
             @Override
-            public void onFailure(Call<List<CategoriesModel>> call, Throwable t) {
+            public void onFailure(Call<List<ProductsModel>> call, Throwable t) {
                 Toast.makeText(getContext(), "Failed to contact server. Please try again later.", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    /*LOAD CATEGORIES LIST IN RECYCLER VIEW USING ADAPTER*/
-    private void loadCategoriesData(List<CategoriesModel> categoriesList) {
-        adapter = new CategoriesAdapter(getContext(), categoriesList);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
-    }
-
-    /*SHOW ADD CATEGORY DIALOG*/
-    public void addCategoryDialog() {
+    /*SHOW ADD DELIVERY BOY DIALOG*/
+    public void addOrderDialog() {
         final Dialog dialog = new Dialog(getContext());
-        dialog.setContentView(R.layout.add_category_layout);
-        initAddDeliveryBoyDialog(dialog);
+        dialog.setContentView(R.layout.add_order_layout);
+        initOrderDialog(dialog);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (etName.getText().toString().isEmpty() == true) {
-                    Toast.makeText(getContext(), "Field cannot be empty.", Toast.LENGTH_SHORT).show();
+                if (etName.getText().toString().isEmpty() == true || etQty.getText().toString().isEmpty() == true || etLocation.getText().toString().isEmpty() == true) {
+                    Toast.makeText(getContext(), "Fields cannot be empty.", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    addCategory(etName.getText().toString());
+                    addOrder(UserDashboardActivity.u_id, etName.getText().toString(), etQty.getText().toString(), etLocation.getText().toString(), tvPrice.getText().toString());
                     dialog.dismiss();
                 }
             }
@@ -113,33 +108,41 @@ public class CategoriesFragment extends Fragment {
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         int width = metrics.widthPixels;
         int height = metrics.heightPixels;
-        dialog.getWindow().setLayout((6 * width)/7, (2 * height)/5);
+        dialog.getWindow().setLayout((6 * width)/7, (4 * height)/5);
     }
 
-    private void initAddDeliveryBoyDialog(Dialog dialog) {
+    private void initOrderDialog(Dialog dialog) {
         etName = dialog.findViewById(R.id.et_name);
+        etEmail = dialog.findViewById(R.id.et_email);
+        etPassword = dialog.findViewById(R.id.et_password);
+        spShiftStart = dialog.findViewById(R.id.sp_shift_start);
+        spShiftEnd = dialog.findViewById(R.id.sp_shift_end);
         btnAdd = dialog.findViewById(R.id.btn_add_db);
         btnCancel = dialog.findViewById(R.id.btn_cancel);
     }
 
     private void initDialogView(View view) {
         etName = view.findViewById(R.id.et_name);
+        etEmail = view.findViewById(R.id.et_email);
+        etPassword = view.findViewById(R.id.et_password);
+        spShiftStart = view.findViewById(R.id.sp_shift_start);
+        spShiftEnd = view.findViewById(R.id.sp_shift_end);
         btnAdd = view.findViewById(R.id.btn_add_db);
         btnCancel = view.findViewById(R.id.btn_cancel);
     }
 
-    /*ADD CATEGORY API CALL*/
-    private void addCategory(String name){
+    /*ADD DELIVERY BOY API CALL*/
+    private void addDeliveryBoy(String name, String email, String password, String shiftStart, String shiftEnd){
         RestAPI service = RestClient.getRetrofitInstance().create(RestAPI.class);
-        Call<String> call = service.postCategory(name);
+        Call<String> call = service.postDeliveryBoy(name, email, password, shiftStart, shiftEnd);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.body().equals("false"))
-                    Toast.makeText(getContext(), "Failed to add category. Please try again later.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Delivery boy registration failed. Please try again later.", Toast.LENGTH_SHORT).show();
                 else if (response.body().equals("true")){
-                    Toast.makeText(getContext(), "Category added successfully.", Toast.LENGTH_SHORT).show();
-                    getCategoriesData();
+                    Toast.makeText(getContext(), "Delivery boy successfully registered.", Toast.LENGTH_SHORT).show();
+                    getDeliveryBoysData();
                 }
             }
 

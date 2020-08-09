@@ -63,5 +63,28 @@ namespace OnlineFoodOrderingSystem.Controllers
             }
             return products;
         }
+
+        //Update product quantity after delivery completion
+        [HttpPut]
+        public bool UpdateStock(int od_user_id, int od_pid)
+        {
+            using (SqlConnection con = new SqlConnection(AppConnection.GetConnectionString()))
+            {
+                using (SqlCommand cmd = new SqlCommand("USP_PRODUCTS_UPDATE_STOCK", con))
+                {
+                    con.Open();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("od_user_id", od_user_id);
+                    cmd.Parameters.AddWithValue("od_pid", od_pid);
+
+                    int rowEffected = cmd.ExecuteNonQuery();
+                    if (rowEffected > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }

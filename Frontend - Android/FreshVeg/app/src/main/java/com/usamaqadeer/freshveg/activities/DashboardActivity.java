@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import com.usamaqadeer.freshveg.R;
 import com.usamaqadeer.freshveg.activities.Admin.AdminDashboardActivity;
-import com.usamaqadeer.freshveg.activities.DeliveryBoy.DeliveryBoyActivity;
-import com.usamaqadeer.freshveg.activities.User.UserActivity;
+import com.usamaqadeer.freshveg.activities.DeliveryBoy.DeliveryBoyDashboardActivity;
+import com.usamaqadeer.freshveg.activities.User.UserDashboardActivity;
 import com.usamaqadeer.freshveg.api.rest.RestAPI;
 import com.usamaqadeer.freshveg.api.rest.RestClient;
 
@@ -229,7 +229,7 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.body().equals("0"))
-                    Toast.makeText(DashboardActivity.this, "Login failed. Please try again later.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DashboardActivity.this, "Username or password is incorrect.", Toast.LENGTH_SHORT).show();
                 else
                     startActivity(new Intent(DashboardActivity.this, AdminDashboardActivity.class));
             }
@@ -249,9 +249,9 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.body().equals("0"))
-                    Toast.makeText(DashboardActivity.this, "Login failed. Please try again later.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DashboardActivity.this, "Username or password is incorrect.", Toast.LENGTH_SHORT).show();
                 else
-                    startActivity(new Intent(DashboardActivity.this, DeliveryBoyActivity.class));
+                    startActivity(new Intent(DashboardActivity.this, DeliveryBoyDashboardActivity.class));
             }
 
             @Override
@@ -269,9 +269,9 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.body().equals("0"))
-                    Toast.makeText(DashboardActivity.this, "Login failed. Please try again later.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DashboardActivity.this, "Username or password is incorrect.", Toast.LENGTH_SHORT).show();
                 else
-                    startActivity(new Intent(DashboardActivity.this, UserActivity.class));
+                    startActivity(new Intent(DashboardActivity.this, UserDashboardActivity.class).putExtra("u_id", response.body()));
             }
 
             @Override
@@ -324,7 +324,7 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.body().equals("false"))
-                    Toast.makeText(DashboardActivity.this, "Password reset failed because user not found.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DashboardActivity.this, "Password reset failed because user was not found.", Toast.LENGTH_SHORT).show();
                 else if (response.body().equals("true"))
                     Toast.makeText(DashboardActivity.this, "Password has been reset successfully.", Toast.LENGTH_SHORT).show();
             }
