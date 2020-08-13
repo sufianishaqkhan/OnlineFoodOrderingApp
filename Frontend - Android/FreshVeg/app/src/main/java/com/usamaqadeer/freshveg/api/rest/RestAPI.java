@@ -97,6 +97,17 @@ public interface RestAPI {
             @Query("db_shiftend") String shiftEnd
     );
 
+    @POST("Order/PutOrderAssign")
+    Call<String> assignOrderToDB(
+            @Query("oa_u_id") int oa_u_id,
+            @Query("oa_db_id") int oa_db_id
+    );
+
+    @POST("DeliveryBoy/PutOrderCompleted")
+    Call<String> changeStatusToDelivered(
+            @Query("oa_u_id") int oa_u_id
+    );
+
     /*ORDERS APIS*/
     @GET("Order/GetOrderDetails")
     Call<List<OrderDetailsModel>> getOrderDetails();
@@ -111,5 +122,10 @@ public interface RestAPI {
             @Query("od_qty") String od_qty,
             @Query("od_delivered_loc") String od_delivered_loc,
             @Query("od_price") String od_price
+    );
+
+    @GET("User/GetUserOrders")
+    Call<List<OrderAssignsModel>> getUserOrders(
+            @Query("u_id") String u_id
     );
 }

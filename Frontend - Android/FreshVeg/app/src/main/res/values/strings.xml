@@ -37,6 +37,11 @@
         <item>11 PM</item>
         <item>12 PM</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="weight_array">
+        <item>kg</item>
+        <item>gram</item>
+        <item>dozen</item>
+        <item>crate</item>
+        <item>single piece</item>
+    </string-array>
 </resources>

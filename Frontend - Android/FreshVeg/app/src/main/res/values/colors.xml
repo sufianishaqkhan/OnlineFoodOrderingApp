@@ -30,6 +30,8 @@
     <color name="background">#EFF0F1</color>
     <color name="sub_head">#266380</color>E61400
     <color name="dark_red">#E61400</color>
+    <color name="colorPopupBackground">#F1F9FF</color>
+    <color name="colorgreenbutton">#04CAA7</color>
 
 
     <color name="blueStart">#4EFFF3</color>

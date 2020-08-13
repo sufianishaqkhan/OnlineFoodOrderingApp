@@ -1,11 +1,8 @@
 package com.usamaqadeer.freshveg.activities.User;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -17,11 +14,9 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.usamaqadeer.freshveg.R;
-import com.usamaqadeer.freshveg.activities.User.Fragments.UserCartFragment;
 import com.usamaqadeer.freshveg.activities.User.Fragments.UserOrdersFragment;
 
 public class UserDashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    public Fragment fragmentUserCart = new UserCartFragment();
     public Fragment fragmentUserOrders = new UserOrdersFragment();
     public static Fragment activeFragment;
     public static String u_id;
@@ -34,7 +29,7 @@ public class UserDashboardActivity extends AppCompatActivity implements Navigati
         setSupportActionBar(toolbar);
 
         u_id = getIntent().getStringExtra("u_id");
-        loadInitialFragment(fragmentUserCart);
+        loadInitialFragment(fragmentUserOrders);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -104,9 +99,7 @@ public class UserDashboardActivity extends AppCompatActivity implements Navigati
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.nav_user_cart)
-            loadFragment(fragmentUserCart);
-        else if (id == R.id.nav_user_order)
+        if (id == R.id.nav_user_order)
             loadFragment(fragmentUserOrders);
         else if (id == R.id.nav_user_signout)
             finish();

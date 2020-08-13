@@ -83,7 +83,7 @@ namespace OnlineFoodOrderingSystem.Controllers
             return deliveryBoys;
         }
 
-        [HttpPut]
+        [HttpPost]
         public bool PutOrderCompleted(int oa_u_id)
         {
             using (SqlConnection con = new SqlConnection(AppConnection.GetConnectionString()))

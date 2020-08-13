@@ -251,7 +251,7 @@ public class DashboardActivity extends AppCompatActivity {
                 if (response.body().equals("0"))
                     Toast.makeText(DashboardActivity.this, "Username or password is incorrect.", Toast.LENGTH_SHORT).show();
                 else
-                    startActivity(new Intent(DashboardActivity.this, DeliveryBoyDashboardActivity.class));
+                    startActivity(new Intent(DashboardActivity.this, DeliveryBoyDashboardActivity.class).putExtra("db_id", response.body()));
             }
 
             @Override
@@ -301,7 +301,7 @@ public class DashboardActivity extends AppCompatActivity {
         });
     }
 
-    /*FOR PASSWORD API CALL FOR ADMIN, DELIVERY BOY AND USER*/
+    /*FORGOT PASSWORD API CALL FOR ADMIN, DELIVERY BOY AND USER*/
     private void forgotPassword(String email, String password, int forgetType){
         RestAPI service = RestClient.getRetrofitInstance().create(RestAPI.class);
         Call<String> call = null;

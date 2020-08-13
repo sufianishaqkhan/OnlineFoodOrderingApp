@@ -37,9 +37,10 @@ public class ProductsFragment extends Fragment {
     private FloatingActionButton fabAddProduct;
     private EditText etName, etPrice, etQty;
     private Spinner spCategories;
+    private Spinner spWeight;
     private Button btnAdd, btnCancel;
     private List<CategoriesModel> categoriesList;
-    private List<String> spCategoriesList = new ArrayList<>();;
+    private List<String> spCategoriesList = new ArrayList<>();
 
     public ProductsFragment() { }
 
@@ -125,7 +126,7 @@ public class ProductsFragment extends Fragment {
                     Toast.makeText(getContext(), "Fields cannot be empty.", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    addProduct(etName.getText().toString(), categoriesList.get(spCategories.getSelectedItemPosition()).getC_id(), etPrice.getText().toString(), etQty.getText().toString());
+                    addProduct(etName.getText().toString(), categoriesList.get(spCategories.getSelectedItemPosition()).getC_id(), etPrice.getText().toString(), etQty.getText().toString(), spWeight.getSelectedItem().toString());
                     dialog.dismiss();
                 }
             }
@@ -150,6 +151,7 @@ public class ProductsFragment extends Fragment {
         spCategories = dialog.findViewById(R.id.sp_category);
         etPrice = dialog.findViewById(R.id.et_price);
         etQty = dialog.findViewById(R.id.et_qty);
+        spWeight = dialog.findViewById(R.id.sp_weight);
         btnAdd = dialog.findViewById(R.id.btn_add_product);
         btnCancel = dialog.findViewById(R.id.btn_cancel);
         populateCategoriesSpinner(categoriesList);
@@ -160,11 +162,13 @@ public class ProductsFragment extends Fragment {
         spCategories = view.findViewById(R.id.sp_category);
         etPrice = view.findViewById(R.id.et_price);
         etQty = view.findViewById(R.id.et_qty);
+        spWeight = view.findViewById(R.id.sp_weight);
         btnAdd = view.findViewById(R.id.btn_add_product);
         btnCancel = view.findViewById(R.id.btn_cancel);
     }
 
     private void populateCategoriesSpinner(List<CategoriesModel> categoriesList) {
+        spCategoriesList.clear();
         for (int i = 0; i < categoriesList.size(); i++)
             spCategoriesList.add(categoriesList.get(i).getC_categorytype());
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, spCategoriesList);
@@ -173,9 +177,9 @@ public class ProductsFragment extends Fragment {
     }
 
     /*ADD PRODUCT API CALL*/
-    private void addProduct(String name, int pId, String price, String qty){
+    private void addProduct(String name, int pId, String price, String qty, String weight){
         RestAPI service = RestClient.getRetrofitInstance().create(RestAPI.class);
-        Call<String> call = service.postProduct(name, pId, price, qty, "kg");
+        Call<String> call = service.postProduct(name, pId, price, qty, weight);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

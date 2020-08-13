@@ -9,7 +9,7 @@ namespace OnlineFoodOrderingSystem.Controllers
 {
     public class OrderController : ApiController
     {
-        [HttpPut]
+        [HttpPost]
         public bool PutOrderAssign(int oa_u_id, int oa_db_id)
         {
             using (SqlConnection con = new SqlConnection(AppConnection.GetConnectionString()))
@@ -75,6 +75,7 @@ namespace OnlineFoodOrderingSystem.Controllers
                     {
                         OrderAssigns order = new OrderAssigns();
                         order.oa_id = Convert.ToInt32(sdr["oa_id"].ToString());
+                        order.oa_u_id = Convert.ToInt32(sdr["oa_u_id"].ToString());
                         order.u_name = sdr["u_name"].ToString();
                         order.p_name = sdr["p_name"].ToString();
                         order.od_qty = Convert.ToInt32(sdr["od_qty"].ToString());

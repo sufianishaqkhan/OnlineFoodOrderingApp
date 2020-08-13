@@ -1,4 +1,4 @@
-package com.usamaqadeer.freshveg.activities.Admin.Adapters;
+package com.usamaqadeer.freshveg.activities.DeliveryBoy.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,33 +9,33 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.usamaqadeer.freshveg.R;
 import com.usamaqadeer.freshveg.activities.Admin.Fragments.AssignOrdersFragment;
+import com.usamaqadeer.freshveg.activities.DeliveryBoy.Fragments.ViewOrdersFragment;
 import com.usamaqadeer.freshveg.api.models.OrderAssignsModel;
 
 import java.util.List;
 
-public class AssignOrdersAdapter extends RecyclerView.Adapter<AssignOrdersAdapter.ViewHolder> {
+public class ViewOrdersAdapter extends RecyclerView.Adapter<ViewOrdersAdapter.ViewHolder> {
     private Context context;
     private List<OrderAssignsModel> orderAssignsList;
 
-    public AssignOrdersAdapter(Context context, List<OrderAssignsModel> orderAssignsList){
+    public ViewOrdersAdapter(Context context, List<OrderAssignsModel> orderAssignsList){
         this.context = context;
         this.orderAssignsList = orderAssignsList;
     }
 
     @Override
     @NonNull
-    public AssignOrdersAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewOrdersAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.order_assigns_list_item, parent, false);
-        return new AssignOrdersAdapter.ViewHolder(view);
+        return new ViewOrdersAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AssignOrdersAdapter.ViewHolder view, int position) {
+    public void onBindViewHolder(@NonNull ViewOrdersAdapter.ViewHolder view, int position) {
         final OrderAssignsModel selectedOrderAssign = orderAssignsList.get(position);
 
         view.tvOId.setText(Integer.toString(selectedOrderAssign.getOa_id()));
@@ -48,8 +48,8 @@ public class AssignOrdersAdapter extends RecyclerView.Adapter<AssignOrdersAdapte
         view.listItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AssignOrdersFragment.u_id = selectedOrderAssign.getOa_u_id();
-                AssignOrdersFragment.assignToDBPopUp.setVisibility(View.VISIBLE);
+                ViewOrdersFragment.u_id = selectedOrderAssign.getOa_u_id();
+                ViewOrdersFragment.changeStatusToDeliveredPopUp.setVisibility(View.VISIBLE);
             }
         });
     }
